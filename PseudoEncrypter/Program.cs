@@ -12,16 +12,36 @@ namespace PseudoEncrypter
 
         public static List<char> wordLetters;
         public static List<char> alphabet;
+        public static Dictionary<char, char> encryptionCharPairs;
 
         static void Main(string[] args)
         {
             wordLetters = new List<char>();
+            encryptionCharPairs = new Dictionary<char, char>();
+
             InitializeAlphabet();
 
+            Encrypt();
+
+            Console.Write("Unencrypted: ");
             word = Console.ReadLine();
 
             SeperateWordToChars();
-            Encrypt();
+
+            for (int i = 0; i < wordLetters.Count; i++)
+            {
+                if (encryptionCharPairs.ContainsKey(wordLetters[i]))
+                {
+                    wordLetters[i] = encryptionCharPairs[wordLetters[i]];
+                }
+            }
+
+            Console.Write("Encrypted: ");
+
+            for (int i = 0; i < wordLetters.Count; i++)
+            {
+                Console.Write(wordLetters[i]);
+            }
 
             Console.ReadKey();
         }
@@ -38,57 +58,16 @@ namespace PseudoEncrypter
         {
             Random random = new Random();
 
-            for (int i = 0; i < wordLetters.Count; i++)
+            for (int i = 0; i < alphabet.Count; i++)
             {
-                wordLetters[i] = alphabet[random.Next(0, alphabet.Count)];
+                int randomNumber = random.Next(0, alphabet.Count);
 
-                Console.Write(wordLetters[i]);
-                #region
-                /*
-                switch (wordLetters[i])
-                {
-                    case 'a':
-                        wordLetters[i] = 'k';
-                        break;
-                    case 'b':
-                        wordLetters[i] = 'u';
-                        break;
-                    case 'c':
-                        wordLetters[i] = 'z';
-                        break;
-                    case 'd':
-                        wordLetters[i] = 'f';
-                        break;
-                    case 'e':
-                        wordLetters[i] = 'r';
-                        break;
-                    case 'f':
-                        wordLetters[i] = 'q';
-                        break;
-                    case 'g':
-                        wordLetters[i] = 'h';
-                        break;
-                    case 'h':
-                        wordLetters[i] = 't';
-                        break;
-                    case 'i':
-                        wordLetters[i] = 'v';
-                        break;
-                    case 'j':
-                        wordLetters[i] = 'm';
-                        break;
-                    case 'k':
-                        wordLetters[i] = 'g';
-                        break;
-                    case 'l':
-                        wordLetters[i] = 'y';
-                        break;
-                    case 'm':
-                        wordLetters[i] = 'x';
-                        break;
-                }
-                */
-                #endregion
+                encryptionCharPairs.Add(alphabet[i], alphabet[randomNumber]);
+            }
+
+            foreach (var pair in encryptionCharPairs)
+            {
+                Console.WriteLine("{0}, {1}", pair.Key, pair.Value);
             }
         }
 
