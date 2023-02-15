@@ -43,7 +43,7 @@ namespace PseudoEncrypter
                 Console.Write(wordLetters[i]);
             }
 
-            Console.ReadKey();
+            Console.ReadLine();
         }
 
         private static void SeperateWordToChars()
@@ -67,7 +67,7 @@ namespace PseudoEncrypter
 
             foreach (var pair in encryptionCharPairs)
             {
-                Console.WriteLine("{0}, {1}", pair.Key, pair.Value);
+                Console.WriteLine("| {0} -> {1} |", pair.Key, pair.Value);
             }
         }
 
