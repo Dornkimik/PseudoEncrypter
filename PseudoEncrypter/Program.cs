@@ -16,6 +16,7 @@ namespace PseudoEncrypter
         static void Main(string[] args)
         {
             wordLetters = new List<char>();
+            InitializeAlphabet();
 
             word = Console.ReadLine();
 
@@ -35,8 +36,15 @@ namespace PseudoEncrypter
 
         private static void Encrypt()
         {
+            Random random = new Random();
+
             for (int i = 0; i < wordLetters.Count; i++)
             {
+                wordLetters[i] = alphabet[random.Next(0, alphabet.Count)];
+
+                Console.Write(wordLetters[i]);
+                #region
+                /*
                 switch (wordLetters[i])
                 {
                     case 'a':
@@ -79,8 +87,8 @@ namespace PseudoEncrypter
                         wordLetters[i] = 'x';
                         break;
                 }
-
-                Console.Write(wordLetters[i]);
+                */
+                #endregion
             }
         }
 
