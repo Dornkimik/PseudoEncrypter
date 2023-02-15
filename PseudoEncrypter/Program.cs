@@ -20,14 +20,28 @@ namespace PseudoEncrypter
             encryptionCharPairs = new Dictionary<char, char>();
 
             InitializeAlphabet();
-
-            Encrypt();
-
-            Console.Write("Unencrypted: ");
-            word = Console.ReadLine();
-
+            CreateEncryptionTable();
+            UserInput();
             SeperateWordToChars();
+            EncryptCharacters();
+            PrintEncryptedWord();
 
+            Console.ReadLine();
+        }
+
+        private static void PrintEncryptedWord()
+        {
+            Console.Write("Encrypted: ");
+
+            for (int i = 0; i < wordLetters.Count; i++)
+            {
+                Console.Write(wordLetters[i]);
+            }
+        }
+
+        private static void EncryptCharacters()
+        {
+            // Changes characters from the unencrypted word to the value of the list that encrypts the character
             for (int i = 0; i < wordLetters.Count; i++)
             {
                 if (encryptionCharPairs.ContainsKey(wordLetters[i]))
@@ -35,15 +49,12 @@ namespace PseudoEncrypter
                     wordLetters[i] = encryptionCharPairs[wordLetters[i]];
                 }
             }
+        }
 
-            Console.Write("Encrypted: ");
-
-            for (int i = 0; i < wordLetters.Count; i++)
-            {
-                Console.Write(wordLetters[i]);
-            }
-
-            Console.ReadLine();
+        private static void UserInput()
+        {
+            Console.Write("Unencrypted: ");
+            word = Console.ReadLine();
         }
 
         private static void SeperateWordToChars()
@@ -54,7 +65,7 @@ namespace PseudoEncrypter
             }
         }
 
-        private static void Encrypt()
+        private static void CreateEncryptionTable()
         {
             Random random = new Random();
 
@@ -62,6 +73,7 @@ namespace PseudoEncrypter
             {
                 int randomNumber = random.Next(0, alphabet.Count);
 
+                // defines a random character to every character in the alphabet
                 encryptionCharPairs.Add(alphabet[i], alphabet[randomNumber]);
             }
 
