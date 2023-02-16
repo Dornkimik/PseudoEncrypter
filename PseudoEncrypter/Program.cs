@@ -74,7 +74,10 @@ namespace PseudoEncrypter
                 int randomNumber = random.Next(0, alphabet.Count);
 
                 // defines a random character to every character in the alphabet
-                encryptionCharPairs.Add(alphabet[i], alphabet[randomNumber]);
+                if (!encryptionCharPairs.ContainsValue(alphabet[randomNumber]))
+                {
+                    encryptionCharPairs.Add(alphabet[i], alphabet[randomNumber]);
+                }
             }
 
             foreach (var pair in encryptionCharPairs)
